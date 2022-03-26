@@ -1,36 +1,43 @@
 # DEVELOPER Wordpress
 
-A boilerplate wordpress setup - for developers, and specifically for self-hosting wordpress.
+A boilerplate wordpress setup - for developers 🤯, and specifically for self-hosting wordpress.
 
 There's strong opinion and effort to keep [wordpress installation seperate](#wordpress-installation) from [custom code](#custom-code), to also version-control the [server/code-maintenance related tooling](#server-configurations), and to [organize theme files](#theme) with intention and structure. Also ships with [Local Development](#local-development) gitsubmodule, if you choose to use it.
 
 
-Quick Notes:
+💡 Quick Notes:
 
 - This repository is using the [MIT License](/LICENSE-MIT).
 - Neither Wordpress nor any plugins are included in this repo.
     - You download them and drop them in yourself!
-- You can just download a zip of this repo, and use git init with your own repository
-    - Alternatively, clone it, but then setup an orphan branch to erase the history and base to your own.
-    - Once you have git tracking, you can use the git submodule for DockerLocal (Local Dev)
+- You can git clone this project at first, but then [setup your own tracking](#add-your-own-git-repository) and can [start with a fresh history](#reset-the-git-history)
     - Yay for version controlling your wordpress project!
-- If you are using WP-ENGINE, and want a boilerplate and local dev setup for that, well that's coming soon in another repo!
+- If you are using WP Engine, and want a boilerplate and local dev setup for that, well that's coming soon in another repo!
 
 ---
 
 ## Contents
 
-- [Installation](#installation)
-    - [Login](#login)
-    - [Download/Upgrade](#download--upgrade)
-    - [wp-config](#wp-config)
-    - [php env vars](#php-env-vars)
+[Installation](#installation)
+- [Git Clone](#installation)
+- [Add wordpress](#add-latest-wordpress)
+- [Run Locally](#run-locally-with-dockerlocal)
+- [Add your Repo](#add-your-own-git-repository)
+- [Reset commit history](#reset-the-git-history)
+
+[Wordpress Goods](#wordpress-goods)
+- [Login](#login)
+- [Download/Upgrade](#download--upgrade)
+- [Automated wp-config](#wp-config)
+- [php env vars](#php-env-vars)
 - [Code Structure](#code-structure)
-- [Wordpress Installation](#wordpress-installation)
-- [Custom Code](#custom-code)
-    - [plugins](#plugins)
-    - [mu-plugins](#mu-plugins)
-    - [theme](#theme)
+- [Detailed Wordpress Installation](#wordpress-installation)
+
+[Plugins & Mu-Plugins](#custom-code)
+- [plugins](#plugins)
+- [mu-plugins](#mu-plugins)
+
+[Theme](#theme)
 - [Local Developement](#local-development)
 - [Server Configurations](#server-configurations)
 
@@ -38,15 +45,82 @@ Quick Notes:
 
 ## Installation
 
-Since this is a boilerplate to your own project, I recommend getting these files **as a zip** *instead of via git clone*.
-
-To save you time, here's a terminal command using curl to download the github zip file. Be in the directory you want your project to be in.
+Git clone and install DockerLocal submodule for local development
 
 ```
-curl -L -O https://github.com/amurrell/developer-wordpress/archive/refs/heads/main.zip && tar -xzf main.zip && mv developer-wordpress-main devwp && rm main.zip
+cd <your-code-folder>
+
+git clone git@github.com:amurrell/developer-wordpress.git <your-project-name>
+cd commands
+./install-gitmodules
 ```
 
-Then you can `git init` with **your own repository and version control**.
+### Add Latest Wordpress
+
+For more detailed information about adding specific versions of wordpress or upgrading/downgrading - [read here](#wordpress-installation), but the quick setup is this:
+
+```
+cd <your-code-folder>
+
+cd html
+curl -O -L https://wordpress.org/latest.zip
+unzip latest.zip
+mv wordpress wp
+rm latest.zip
+```
+
+
+### Run Locally with DockerLocal
+
+```
+cd <your-project-name>/DockerLocal/commands
+echo "3010" > ../port
+./site-up -c=my_db
+
+# Optionally, for php-version changes
+# echo "7.4" > DockerLocal/versions/override-php-version
+```
+
+- Visit your site: [http://localhost:3010](http://localhost:3010)
+    - Login to wp-admin @ http://localhost:3010/wp/wp-admin
+- Read for more information about [local development](#local-development)
+
+---
+
+### Add your own git repository
+
+```
+# Add your repo
+git remote rename origin devwp
+git remote add origin git@github.com:<you>/<project-name>.git
+```
+
+### Reset the git history
+
+```
+# Clear history with orphan branch
+git checkout --orphan temp_branch
+
+# add all the files
+git add -A
+
+# your initial commit message
+git commit -am "The initial setup of my project, based on developer-wordpress"
+
+# delete original branches
+git branch -D master
+git branch -D main
+
+# rename your temp_branch
+git branch -m main
+
+# if you have an origin main, this will force push, with cleared history
+git push -f origin main
+```
+
+---
+
+# Wordpress Goods
 
 ---
 
@@ -168,6 +242,18 @@ Add plugins, add must-use (mu-plugins) plugins, themes, etc you want to use. Als
 
 Copy what plugins you want to use into the `html/wp-content/plugins` folder. It's recommended to use version control and not install via wordpress admin, but do as you wish. You may need to update permissions on your folders if you plan to use wordpress admin to manage your plugin downloads.
 
+Once you have wordpress downloaded, you can copy all the plugins, or just some:
+
+```
+cd html
+
+# copy specific plugin
+cp -R wp/wp-content/plugins/akismet wp-content/plugins/
+
+# copy all of them?
+cp -R wp/wp-content/plugins/* wp-content/plugins/
+```
+
 ### Mu-Plugins
 
 The `load.php` file will loop through all directories in this folder and look for load files that either match the directory name or end in `-loader.php`
@@ -184,7 +270,7 @@ Eg.
 
 ---
 
-## Theme
+# Theme
 
 Use `devwp` or you can drop in an existing theme and use your own.
 
