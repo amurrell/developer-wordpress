@@ -42,6 +42,7 @@ There's strong opinion and effort to keep [wordpress installation separate](#wor
     - [DockerLocal Requirements](#dockerlocal-requirements)
     - [Setup Git Submodule](#setup-gitsubmodule)
     - [Setup Wordpress Database](#setup-database)
+    - [npm install & watch](#npm-install-and-watch)
 - [Server Configurations](#server-configurations)
 
 ---
@@ -344,7 +345,43 @@ The following documentation is about using the `devwp` theme, which you may want
 
 ### Renaming
 
-This project includes a theme, `devwp` which you can rename and edit the comments in `style.css` to your own project. If you do this, please do a search in your editor (eg. vscode) on theme files for `devwp/build` an replace references with your theme name.
+This project includes a theme, `devwp` by default.
+
+If you want to rename this folder - and other instances of this phrasing, then:
+
+1. Rename the folder - in your edit or terminal:
+
+    ```
+    cd html
+    mv wp-content/themes/devwp wp-content/themes/yourtheme
+    ```
+
+1. Edit the comments in `style.css` to your own project.
+
+    ```
+    /*
+        Theme Name: [Rename] Developer Wordpress
+        Theme URI:
+        Description: [Re-describe] DevWP Custom Theme
+        Version: 1
+        Author: You??
+    */
+
+    ```
+
+1. Please do a search in your editor (eg. vscode) on theme files for `devwp/build` an replace references with your theme name. There should be 2 files.
+
+1. Change in `wp-config.php` this:
+
+    ```
+    define('WP_DEFAULT_THEME', 'devwp');
+    ```
+
+1. And in `package.json` you may want to change the name:
+
+    ```
+    "name": "devwp",
+    ```
 
 ### index.php
 
@@ -433,6 +470,59 @@ ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: Y
 
 For more options, like importing an existing database, or switching the PHP / Database versions [read the DockerLocal Documentation](https://github.com/amurrell/DockerLocal).
 
+
+[↑](#contents)
+
+---
+
+### NPM install and Watch
+
+We use `nvm` to manage the version of `nodejs` and `npm` so that we are running on the same setup. You will see `.nvmrc` files in frontend files as a result.
+
+#### Install NVM
+
+You will need to install nvm on your computer first.
+
+See if you have it: `command -v nvm` - nothing? you don't.
+
+If you are on mac or linux, run the following:
+
+```
+wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+
+. ~/.nvm/nvm.sh
+. ~/.profile
+. ~/.bashrc
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+command -v nvm
+```
+
+Then in your terminal, navigate to `<your-code>/the-marketedge-app/app/resources/marketedge-vue/` where the `.nvmrc` file is - and run `nvm install`
+
+#### Run npm commands
+
+To work in a better development environment - like using live-reload - and watching on building assets, please do the following before working each time:
+
+```
+cd <your-code>/<your-project>
+cd html/wp-content/themes/devwp/
+
+# install npm packages
+npm install
+
+# Run dev (not watching)
+npm run dev
+
+# Run watch (will re-build, we don't have hot reload)
+npm run watch
+
+# Build Production (for commiting and pushing to origin)
+npm run production
+```
 
 [↑](#contents)
 
