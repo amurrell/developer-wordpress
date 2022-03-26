@@ -19,7 +19,7 @@ Thumbs.db
 
 # Local Development Related #
 ######################
-DockerLocal
+!DockerLocal
 
 # Misc #
 ######################
