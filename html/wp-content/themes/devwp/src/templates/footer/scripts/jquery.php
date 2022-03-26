@@ -1,0 +1,1 @@
+<script type="text/javascript" src="<?= get_template_directory_uri() . 'assets/js/jquery.min.js'; ?>"></script>

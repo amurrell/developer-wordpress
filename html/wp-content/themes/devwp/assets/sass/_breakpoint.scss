@@ -1,0 +1,43 @@
+/*@import 'settings/breakpoints';*/
+
+///
+/// Mixin for managing responsive breakpoints
+///
+/// @group breakpoint
+///
+/// @require {map} $breakpoints
+///
+/// @param {string} $breakpoint - Breakpoint name
+///
+/// @content [Any CSS properties]
+///
+/// @output `@content` in `@media` wrapper
+///
+/// @example
+///  @include bp('sm') {
+///    margin-top: 0;
+///  }
+///
+
+@mixin bp($breakpoint) {
+	// Check if current breakpoint exists.
+	@if map-has-key($breakpoints, $breakpoint) {
+		$breakpoint-value: map-get($breakpoints, $breakpoint);
+
+		// Don't wrap in `@media` if values are incorrect.
+		@if (type-of($breakpoint-value) != number) or
+			($breakpoint-value <= 0) {
+			@content;
+		}
+		@else {
+			@media (min-width: $breakpoint-value) {
+				@content;
+			}
+		}
+	}
+
+	// Throw error if breakpoint doesn't exist.
+	@else {
+		@error '#{$breakpoint}' + ' breakpoint was not found.';
+	}
+}

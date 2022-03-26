@@ -1,0 +1,15 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: $font-roboto;
+    font-weight: normal;
+    overflow-x: hidden;
+}
+
+html {
+    overflow-x: hidden;
+
+    @include bp('md') {
+        overflow: visible;
+    }
+}

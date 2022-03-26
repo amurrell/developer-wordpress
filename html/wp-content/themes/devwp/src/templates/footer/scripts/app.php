@@ -1,0 +1,1 @@
+<script type="text/javascript" src="<?= get_template_directory_uri() . '/build/js/app.js'; ?>"></script>

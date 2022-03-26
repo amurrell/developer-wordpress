@@ -1,0 +1,36 @@
+.*
+!.gitignore
+!.jshintrc
+!.jshintrc-src
+log/*
+php_sessions/*
+html/nginx.conf
+node_modules
+
+# WP-CONFIG
+conf/wp-config.php
+
+# OS generated files #
+######################
+.DS_Store*
+ehthumbs.db
+Thumbs.db
+
+# Local Development Related #
+######################
+DockerLocal
+
+# Misc #
+######################
+!empty-file
+tweets.json
+tweets.json.bak
+twurl-tweets.json
+tweets-formatted.json
+testoauth.php
+since_id
+
+# Wordpress #
+######################
+uploads
+uploads/*

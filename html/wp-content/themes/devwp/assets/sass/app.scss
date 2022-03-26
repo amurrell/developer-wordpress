@@ -1,0 +1,20 @@
+// Google Fonts
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,300,500,600,700,900|Open+Sans:300,400,600,700');
+
+$icon-font-path: '/wp-content/themes/devwp/build/fonts/';
+
+@media print{@page {size: portrait}}
+
+// setup
+@import "settings";
+@import "breakpoint";
+@import "globals";
+@import "retina";
+@import "animations";
+
+
+// templates
+@import "../../src/views/header/header";
+@import "../../src/features/footer/foot";
+@import "../../src/features/page/page";
+@import "../../src/features/page/content/content";
