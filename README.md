@@ -87,12 +87,29 @@ echo "3010" > ../port
 
 # Optionally, for php-version changes
 # echo "7.4" > DockerLocal/versions/override-php-version
+# and run ./site-up -c=my_db again
 ```
 
 - Visit your site: [http://localhost:3010](http://localhost:3010)
     - Login to wp-admin @ http://localhost:3010/wp/wp-admin
 - Read for more information about [local development](#local-development)
 
+### Start & Stop
+
+```
+# Turn off DockerLocal
+cd DockerLocal/commands
+./site-down
+
+# Turn on DockerLocal
+./site-up
+
+# ssh into web container for some reason
+./site-ssh -h=web
+
+# edit DockerLocal config eg env.yml files? Restart
+./site-up
+```
 ---
 
 ### Add your own git repository
@@ -236,6 +253,28 @@ define('DB_NAME', getenv('APP_WP_DB_NAME'));
 define('DB_USER', getenv('APP_WP_DB_USER'));
 define('DB_PASSWORD', getenv('APP_WP_DB_PASSWORD'));
 define('DB_HOST', getenv('APP_WP_DB_HOST'));
+```
+
+### DockerLocal Env Vars
+
+If you need to add more variables to use - do:
+
+First, copy `env-example.yml` which is used to generate `env-custom.yml`
+```
+cd <your-project>
+cp DockerLocal/env-example.yml env.yml
+```
+
+We want to maintain all the stuff there, but just append your new vars:
+```
+env[MY_VAR]: something
+env[ANOTHER_VAR]: 39fh4hjddhfj-made-up
+```
+
+Always restart DockerLocal - this will regenerate `env-custom.yml`
+```
+cd DockerLocal/commands
+./site-up
 ```
 
 [↑](#contents)
