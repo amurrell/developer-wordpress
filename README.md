@@ -38,7 +38,10 @@ There's strong opinion and effort to keep [wordpress installation separate](#wor
 - [mu-plugins](#mu-plugins)
 
 [Theme](#theme)
-- [Local Developement](#local-development)
+- [Local Development](#local-development)
+    - [DockerLocal Requirements](#dockerlocal-requirements)
+    - [Setup Git Submodule](#setup-gitsubmodule)
+    - [Setup Wordpress Database](#setup-database)
 - [Server Configurations](#server-configurations)
 
 ---
@@ -74,6 +77,8 @@ rm latest.zip
 ---
 
 ### Run Locally with DockerLocal
+
+✋ wait! Have you [met requirements](#dockerlocal-requirements) for DockerLocal?
 
 ```
 cd <your-project-name>/DockerLocal/commands
@@ -350,7 +355,20 @@ die();
 
 This project ships with [DockerLocal](https://github.com/amurrell/DockerLocal) for local development in the form of a `gitmodule`.
 
-### Requirements
+### DockerLocal Requirements
+
+- Linux or Mac`*`
+- Bash 4+ (MacOS default 3.2.57, needs [brew install](https://github.com/amurrell/DockerLocal#update-bash-for-macos))
+- Docker-engine`**`
+- Docker-compose`**`
+    - must downgrade to v1 (in your terminal do, `docker-compose disable-v2`)
+
+If you are using **Docker for Mac** aka **Docker Desktop**, you just need to install that (it includes the above and downgrade docker-compose). Move docker to applications folder, and run the program. **You can skip the tutorial**.
+
+- `*`  *(not tested w/ windows WSL; tested with ubuntu)*
+- `**` *(Tested Docker Desktop - version 20.10.0, build 7287ab3)*
+
+### Setup GitSubmodule
 
 If you have initialized this project with git (either from git cloning or from your own tracking), then you can install the `.gitmodules`.
 
@@ -360,11 +378,18 @@ git submodule update --init --recursive
 
 If you forget this code, you will see you can go to `developer-wordpress/commands` and `./install-gitmodules`
 
+### Setup Database
+
 To use [DockerLocal](https://github.com/amurrell/DockerLocal), you'll want to read the docs over there, but to keep things simple, all you need to do is:
 
 ```
 cd DockerLocal/commands
 ./site-up -c=your_wp_db_name
+```
+
+Run ^ it again if you get:
+```
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
 ```
 
 For more options, like importing an existing database, or switching the PHP / Database versions [read the DockerLocal Documentation](https://github.com/amurrell/DockerLocal).
