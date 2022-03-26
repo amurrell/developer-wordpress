@@ -10,8 +10,10 @@ Quick Notes:
 - This repository is using the [MIT License](/LICENSE-MIT).
 - Neither Wordpress nor any plugins are included in this repo.
     - You download them and drop them in yourself!
-- You don't git clone this project
-    - You download the zip and use git init with your own repository. Yay for version controlling your wordpress project!
+- You can just download a zip of this repo, and use git init with your own repository
+    - Alternatively, clone it, but then setup an orphan branch to erase the history and base to your own.
+    - Once you have git tracking, you can use the git submodule for DockerLocal (Local Dev)
+    - Yay for version controlling your wordpress project!
 - If you are using WP-ENGINE, and want a boilerplate and local dev setup for that, well that's coming soon in another repo!
 
 ---
