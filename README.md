@@ -55,6 +55,8 @@ cd commands
 ./install-gitmodules
 ```
 
+---
+
 ### Add Latest Wordpress
 
 For more detailed information about adding specific versions of wordpress or upgrading/downgrading - [read here](#wordpress-installation), but the quick setup is this:
@@ -69,6 +71,7 @@ mv wordpress wp
 rm latest.zip
 ```
 
+---
 
 ### Run Locally with DockerLocal
 
@@ -118,6 +121,8 @@ git branch -m main
 git push -f origin main
 ```
 
+[↑](#contents)
+
 ---
 
 # Wordpress Goods
@@ -160,6 +165,8 @@ Here's the file structure:
 - .gitmodules
 ```
 
+[↑](#contents)
+
 ---
 
 ## Wordpress Installation
@@ -171,6 +178,8 @@ Pure wordpress is downloaded (whatever version you want to use) and placed into 
 ```
 
 The `html/index.php` and `html/wp-config.php` have already adjusted the few references needed to run wordpress at `wp` while also using `html/wp-content`.
+
+---
 
 ### Download / Upgrade
 
@@ -189,6 +198,10 @@ unzip latest.zip
 mv wordpress wp
 rm latest.zip
 ```
+
+[↑](#contents)
+
+---
 
 ### Login
 
@@ -220,6 +233,8 @@ define('DB_PASSWORD', getenv('APP_WP_DB_PASSWORD'));
 define('DB_HOST', getenv('APP_WP_DB_HOST'));
 ```
 
+[↑](#contents)
+
 ---
 
 ## Custom Code
@@ -237,6 +252,9 @@ All the custom code, files, etc that your wordpress project requires should go i
 
 Add plugins, add must-use (mu-plugins) plugins, themes, etc you want to use. Also, you may need to adjust permissions on the uploads folder.
 
+[↑](#contents)
+
+---
 
 ### Plugins
 
@@ -254,6 +272,8 @@ cp -R wp/wp-content/plugins/akismet wp-content/plugins/
 cp -R wp/wp-content/plugins/* wp-content/plugins/
 ```
 
+---
+
 ### Mu-Plugins
 
 The `load.php` file will loop through all directories in this folder and look for load files that either match the directory name or end in `-loader.php`
@@ -267,6 +287,8 @@ Eg.
     - bylines
         - bylines-loader.php
 ```
+
+[↑](#contents)
 
 ---
 
@@ -304,6 +326,10 @@ include( get_query_template( '404' ) );
 die();
 ```
 
+[↑](#contents)
+
+---
+
 ### Other Folders
 
 | Folder          | What it is for                                                            |
@@ -315,6 +341,8 @@ die();
 | build/*         | We build for dev or for production optimized versions of what's in assets |
 | lib             | We keep a library of helpful includes to put into functions.php           |
 | lib/utils       | Specific helpful includes in the library are stored here.                 |
+
+[↑](#contents)
 
 ---
 
@@ -340,6 +368,9 @@ cd DockerLocal/commands
 ```
 
 For more options, like importing an existing database, or switching the PHP / Database versions [read the DockerLocal Documentation](https://github.com/amurrell/DockerLocal).
+
+
+[↑](#contents)
 
 ---
 
@@ -367,3 +398,5 @@ server {
     ...
 }
 ```
+
+[↑](#contents)
