@@ -2,7 +2,7 @@
 
 A boilerplate wordpress setup - for developers 🤯, and specifically for self-hosting wordpress.
 
-There's strong opinion and effort to keep [wordpress installation seperate](#wordpress-installation) from [custom code](#custom-code), to also version-control the [server/code-maintenance related tooling](#server-configurations), and to [organize theme files](#theme) with intention and structure. Also ships with [Local Development](#local-development) gitsubmodule, if you choose to use it.
+There's strong opinion and effort to keep [wordpress installation separate](#wordpress-installation) from [custom code](#custom-code), to also version-control the [server/code-maintenance related tooling](#server-configurations), and to [organize theme files](#theme) with intention and structure. Also ships with [Local Development](#local-development) gitsubmodule, if you choose to use it.
 
 
 💡 Quick Notes:
