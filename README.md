@@ -111,9 +111,9 @@ Or, in the terminal:
 ```
 cd html
 curl -O -L https://wordpress.org/latest.zip
-&& unzip latest.zip
-&& mv wordpress wp
-&& rm latest.zip
+unzip latest.zip
+mv wordpress wp
+rm latest.zip
 ```
 
 ### Login
@@ -192,7 +192,7 @@ The following documentation is about using the `devwp` theme, which you may want
 
 ### Renaming
 
-This project includes a theme, `devwp` which you can rename and edit the comments in `style.css` to your own project. If you do this, please do a search on theme files for `devwp/build` an replace references with your theme name.
+This project includes a theme, `devwp` which you can rename and edit the comments in `style.css` to your own project. If you do this, please do a search in your editor (eg. vscode) on theme files for `devwp/build` an replace references with your theme name.
 
 ### index.php
 
@@ -201,6 +201,34 @@ This project includes a theme, `devwp` which you can rename and edit the comment
 The `index.php` is used as a fallback or default to other theme files, so therefore it has to exist. The `style.css` uses comments to populate the wp-admin with theme information.
 
 The philosophy of the devwp theme is that **if you did not code it, then the page should not render**. This means we make the index.php return a 404.
+
+```
+<?php
+
+// force 404 for things falling back to index.
+// create actual templates for everything.
+// ie. front-page.php, single.php, page.php, archive.php etc
+
+global $wp_query;
+
+$wp_query->set_404();
+status_header( 404 );
+nocache_headers();
+include( get_query_template( '404' ) );
+die();
+```
+
+### Other Folders
+
+| Folder          | What it is for                                                            |
+|-----------------|---------------------------------------------------------------------------|
+| src             | All your logic & html templates                                           |
+| src/controllers | We build all the $data needed for pages in here                           |
+| src/templates   | html templates; PHP is only used for templating                           |
+| assets/*        | We keep all img, js, css in here                                          |
+| build/*         | We build for dev or for production optimized versions of what's in assets |
+| lib             | We keep a library of helpful includes to put into functions.php           |
+| lib/utils       | Specific helpful includes in the library are stored here.                 |
 
 ---
 
