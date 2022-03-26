@@ -14,6 +14,17 @@ There's strong opinion and effort to keep [wordpress installation separate](#wor
     - Yay for version controlling your wordpress project!
 - If you are using WP Engine, and want a boilerplate and local dev setup for that, well that's coming soon in another repo!
 
+
+## Comes with:
+
+- Local Dev setup - you can easily alter these (defaults): PHP version (8.0), DB image (mariadb:10.6), Ubuntu (20.04LTS)
+- Theme
+    - Structure:
+        - Organized templates (php only used for templating),
+        - "Controllers" to build data for layouts
+        - lib folder - used as includes for very neat functions.php
+    - Dev-Tools: laravel mix (webpack abstraction), Hot Module Replacement, BrowserSync, Tailwindcss, Sass
+
 ---
 
 ## Contents
@@ -515,17 +526,32 @@ cd <your-code>/<your-project>
 cd html/wp-content/themes/devwp/
 ```
 
-#### Add your desired packages: here are some suggested
+#### NPM Install & Packages
 
-```
-# npm
-npm install ajv browser-sync browser-sync-webpack-plugin compass compass-sass-mixins jquery sass sass-loader waypoints webpack
+- If you want to use defaults - just: `npm install`
 
-# npm save dev
-npm install -D laravel-mix tailwindcss postcss autoprefixer resolve-url-loader
-npx tailwindcss init
-npx mix
-```
+- Or, if you want to build these tools from scratch you can, but be warned that the configuration may need to change if new versions are out.
+
+    clear out some of the `package.json`:
+
+    ```
+    "dependencies": {},
+    "devDependencies": {}
+    ```
+
+    and run the below:
+
+    ```
+    # npm
+    npm install ajv browser-sync browser-sync-webpack-plugin compass compass-sass-mixins jquery sass sass-loader waypoints webpack
+
+    # npm save dev
+    npm install -D laravel-mix tailwindcss postcss autoprefixer resolve-url-loader
+    npx tailwindcss init
+    npx mix
+    ```
+
+---
 
 #### Run / Build
 
