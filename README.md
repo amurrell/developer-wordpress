@@ -501,19 +501,32 @@ export NVM_DIR="$HOME/.nvm"
 command -v nvm
 ```
 
-Then in your terminal, navigate to `<your-code>/the-marketedge-app/app/resources/marketedge-vue/` where the `.nvmrc` file is - and run `nvm install`
+Then in your terminal, navigate to `<your-code>/developer-wordpress/html/wp-content/themes/devwp` where the `.nvmrc` file is - and run `nvm install`
 
-#### Run npm commands
 
-To work in a better development environment - like using live-reload - and watching on building assets, please do the following before working each time:
+### Run npm commands
+
+#### Go to your theme folder:
 
 ```
 cd <your-code>/<your-project>
 cd html/wp-content/themes/devwp/
+```
 
-# install npm packages
-npm install
+#### Add your desired packages: here are some suggested
 
+```
+# npm
+npm install ajv animate.sass bootstrap-sass browser-sync browser-sync-webpack-plugin compass compass-sass-mixins jquery laravel-mix laravel-mix-svg sass sass-loader vue-template-compiler waypoints
+
+# npm save dev
+npm install -D tailwindcss
+npx tailwindcss init
+```
+
+#### Run / Build
+
+```
 # Run dev (not watching)
 npm run dev
 
