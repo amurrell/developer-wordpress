@@ -1,1 +1,1 @@
-<script type="text/javascript" src="<?= get_template_directory_uri() . '/build/js/app.js'; ?>"></script>
+<script type="text/javascript" src="<?= assetPath() . '/build/js/app.js'; ?>"></script>

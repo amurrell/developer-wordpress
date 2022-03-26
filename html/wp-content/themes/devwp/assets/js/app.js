@@ -7,15 +7,6 @@ require('./plugins/menu');
 require('./plugins/counter');
 require('./plugins/showbyhash');
 require('./plugins/showhashbyclick');
-require('./plugins/procurementToolkit');
-require('./plugins/procurementToolkitAccess');
 require('./plugins/slideToggle');
-require('./plugins/squeezeForm');
 require('./plugins/sticky');
-require('./plugins/carousel');
-require('./plugins/madlibs');
 require('./plugins/classToggle');
-require('./plugins/vendor/jquery.magnific-popup.min.js');
-require('./plugins/vendor/jquery.bvalidator.js');
-
-// require('./plugins/getLastTweet');

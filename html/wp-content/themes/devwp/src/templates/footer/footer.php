@@ -1,10 +1,11 @@
 <footer id="footer">
-<?php
+  <?php
 
-render('/src/features/footer/wp_foot.php', $data);
-render('/src/features/footer/scripts.php');
+  render('/src/templates/footer/wp_foot.php', $data);
+  render('/src/templates/footer/scripts.php');
 
-?>
+  ?>
 </footer>
 </body>
+
 </html>

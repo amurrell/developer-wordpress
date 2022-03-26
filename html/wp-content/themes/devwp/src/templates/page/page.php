@@ -2,22 +2,24 @@
 
 if (!$data) {
 
-    the_post();
+	the_post();
 
-    $data = (object) [
-        'title' => get_the_title(),
-        'content' => apply_filters('the_content', get_the_content()),
-    ];
-
+	$data = (object) [
+		'title' => get_the_title(),
+		'content' => apply_filters('the_content', get_the_content()),
+	];
 }
 
 ?>
 
 <div class="page">
 	<div class="page-container">
-		<h1>
-			<?= $data->title; ?>
-		</h1>
+
+		<?php if ($data->title) : ?>
+			<h1>
+				<?= $data->title; ?>
+			</h1>
+		<?php endif; ?>
 
 		<?php render('/src/templates/page/content/content.php', $data); ?>
 

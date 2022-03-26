@@ -489,6 +489,8 @@ If you are on mac or linux, run the following:
 
 ```
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+# or use
+# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
 . ~/.nvm/nvm.sh
 . ~/.profile
@@ -517,23 +519,31 @@ cd html/wp-content/themes/devwp/
 
 ```
 # npm
-npm install ajv animate.sass bootstrap-sass browser-sync browser-sync-webpack-plugin compass compass-sass-mixins jquery laravel-mix laravel-mix-svg sass sass-loader vue-template-compiler waypoints
+npm install ajv browser-sync browser-sync-webpack-plugin compass compass-sass-mixins jquery sass sass-loader waypoints webpack
 
 # npm save dev
-npm install -D tailwindcss
+npm install -D laravel-mix tailwindcss postcss autoprefixer resolve-url-loader
 npx tailwindcss init
+npx mix
 ```
 
 #### Run / Build
 
 ```
 # Run dev (not watching)
+# - view @ http://localhost:3010
 npm run dev
 
-# Run watch (will re-build, we don't have hot reload)
+# Run dev - watch, browser sync
+# - view @ http://localhost:3001
 npm run watch
 
+# Run dev - hot module replacement, browser sync
+# - view @ http://localhost:3001
+npm run hot
+
 # Build Production (for commiting and pushing to origin)
+# - view @ http://localhost:3010
 npm run production
 ```
 

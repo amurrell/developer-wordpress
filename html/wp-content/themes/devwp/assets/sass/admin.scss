@@ -11,10 +11,3 @@ $icon-font-path: '/wp-content/themes/devwp/build/fonts/';
 @import "globals";
 @import "retina";
 @import "animations";
-
-
-// templates
-@import "../../src/templates/header/header";
-@import "../../src/templates/footer/foot";
-@import "../../src/templates/page/page";
-@import "../../src/templates/page/content/content";
