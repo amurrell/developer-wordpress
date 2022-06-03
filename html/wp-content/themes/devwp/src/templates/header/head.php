@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta charset="<?php bloginfo('charset'); ?>">
-  <meta name="description" content="Learn from your local government officials & staff about the smart, safe, and sustainable solutions working in their communities" />
+  <meta name="description" content="<?php bloginfo('description'); ?>" />
 
   <title><?php wp_title(); ?></title>
 

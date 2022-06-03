@@ -7,6 +7,7 @@ window.app = {
         this.loadNextPlugin();
 
     },
+    pluginsInitialized: false, // keep track of initialization (happen once)
     config: function () {
         $.ajaxSetup({
             cache: true
@@ -14,6 +15,7 @@ window.app = {
     },
     initPlugins: function () {
         var _this = this;
+        _this.pluginsInitialized = true;
 
         this.pluginsData.pluginEls.filter('[data-plugins-json]').each(function () {
             var el = $(this);
@@ -40,13 +42,26 @@ window.app = {
             return;
         }
 
+        // Dependencies: These are fun. We will use promises.
+
+        // Set the callback - after all dependencies are loaded, init the plugin.
+        var cb = function () {
+            _this[plugin].init(el);
+            delete _this[plugin].dependencies;
+        };
+
+        // Create a list of promises (ajax promises from loading scripts)
+        var depPromises = [];
         $.each(_this[plugin].dependencies, function (index, dependency) {
             _this.pluginsData.pluginsToLoad.push(dependency);
             _this.pluginsData.dependencies.push(dependency);
+            depPromises.push(_this.loadPlugin());
         });
 
-        delete _this[plugin].dependencies;
-        this.loadNextPlugin();
+        Promise.all(depPromises).then(cb).catch(function (e) {
+            console.error(e);
+        });
+
     },
     getPluginsData: function () {
         var _this = this;
@@ -115,8 +130,8 @@ window.app = {
         var vendor = is_dep ? 'vendor/' : '';
         var script = base + vendor + plugin + '.min.js?v=' + Math.floor(Date.now() / 1000);
 
-        if (plugin.length) {
-            this.loadScript(script, plugin);
+        if (plugin && plugin.length) {
+            return this.loadScript(script, plugin);
         }
     },
     loadScript: function (script, plugin) {
@@ -124,7 +139,7 @@ window.app = {
 
         _this.pluginsData.loaded.push(plugin);
 
-        $.getScript(script, function () {
+        return $.getScript(script, function () {
             _this.loadNextPlugin();
         }).fail(function () {
             _this.pluginsData.failed.push(plugin);
@@ -138,7 +153,10 @@ window.app = {
     },
     doneLoadingPlugins: function () {
         if (this.pluginsData.pluginsToLoad.length < 1) {
-            this.initPlugins();
+            // This is important to first load, but not once we process dependencies
+            if (!this.pluginsInitialized) {
+                this.initPlugins();
+            }
             return true;
         }
         return false;
