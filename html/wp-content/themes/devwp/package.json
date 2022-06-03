@@ -7,10 +7,10 @@
     "lib": "lib"
   },
   "scripts": {
-    "dev": "NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "watch": "NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "hot": "NODE_ENV=development webpack-dev-server --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "production": "NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    "mix": "NODE_ENV=development npx mix",
+    "watch": "NODE_ENV=development npx mix watch",
+    "hot": "NODE_ENV=development TAILWIND_MODE=watch npx mix watch --hot",
+    "production": "NODE_ENV=production npx mix --production"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.4",
+    "clean-webpack-plugin": "^4.0.0",
     "laravel-mix": "^6.0.43",
     "postcss": "^8.4.12",
     "resolve-url-loader": "^5.0.0",

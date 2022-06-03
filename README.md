@@ -9,7 +9,7 @@ There's strong opinion and effort to keep [wordpress installation separate](#wor
 
 - This repository is using the [MIT License](/LICENSE-MIT).
 - Neither Wordpress nor any plugins are included in this repo.
-    - You download them and drop them in yourself!
+    - You download them and drop them in yourself! (tested with 5.X, 6.0)
 - You can git clone this project at first, but then [setup your own tracking](#add-your-own-git-repository) and can [start with a fresh history](#reset-the-git-history)
     - Yay for version controlling your wordpress project!
 - If you are using WP Engine, and want a boilerplate and local dev setup for that, well that's coming soon in another repo!
@@ -94,7 +94,7 @@ rm latest.zip
 
 ```
 cd <your-project-name>/DockerLocal/commands
-echo "3010" > ../port
+echo "3042" > ../port
 ./site-up -c=my_db
 
 # Optionally, for php-version changes
@@ -102,8 +102,8 @@ echo "3010" > ../port
 # and run ./site-up -c=my_db again
 ```
 
-- Visit your site: [http://localhost:3010](http://localhost:3010)
-    - Login to wp-admin @ http://localhost:3010/wp/wp-admin
+- Visit your site: [http://localhost:3042](http://localhost:3042)
+    - Login to wp-admin @ http://localhost:3042/wp/wp-admin
 - Read for more information about [local development](#local-development)
 
 ### Start & Stop
@@ -557,7 +557,7 @@ cd html/wp-content/themes/devwp/
 
 ```
 # Run dev (not watching)
-# - view @ http://localhost:3010
+# - view @ http://localhost:3042
 npm run dev
 
 # Run dev - watch, browser sync
@@ -569,7 +569,7 @@ npm run watch
 npm run hot
 
 # Build Production (for commiting and pushing to origin)
-# - view @ http://localhost:3010
+# - view @ http://localhost:3042
 npm run production
 ```
 

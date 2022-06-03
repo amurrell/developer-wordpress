@@ -10,10 +10,11 @@ let mix = require('laravel-mix');
  |
  */
 const tailwindcss = require('tailwindcss');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 mix.setPublicPath('./');
 mix.browserSync({
-   proxy: 'localhost:3010',
+   proxy: 'localhost:3042',
 });
 
 var plugins = [
@@ -28,6 +29,14 @@ var plugins = [
    'build/js/plugins/test.js',
    'build/js/plugins/slideToggle.js',
 ];
+
+mix.webpackConfig({
+   plugins: [
+      new CleanWebpackPlugin({
+         cleanOnceBeforeBuildPatterns: ['build/css']
+      })
+   ],
+})
 
 mix.js('assets/js/app.js', 'build/js/')
    .js('assets/js/main.js', 'build/js/')
